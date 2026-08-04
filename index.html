@@ -81,7 +81,7 @@ svg{display:block}
 }
 .primary{padding:16px 34px;border-radius:14px}
 .secondary{padding:16px 34px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:rgba(255,255,255,.035);color:white;font-weight:700}
-.primary:hover,.secondary:hover,.tool-btn:hover,.action-btn:hover,.back-btn:hover,.tag-button:hover{transform:translateY(-4px)}
+.primary:hover,.secondary:hover,.tool-btn:hover,.action-btn:hover,.back-btn:hover{transform:translateY(-4px)}
 .primary:hover,.tool-btn:hover,.action-btn:hover{box-shadow:0 18px 42px rgba(153,67,240,.52)}
 .tags{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:34px}
 .tag-button{
@@ -89,7 +89,7 @@ svg{display:block}
   background:rgba(255,255,255,.025);color:#a79db7;
   font:600 12px "JetBrains Mono",monospace;text-transform:uppercase
 }
-.tag-button:hover{color:white;border-color:rgba(168,85,247,.65);box-shadow:0 0 22px rgba(155,77,245,.18)}
+.static-tag{cursor:default}
 
 .status{
   width:min(var(--max),calc(100% - 44px));display:flex;align-items:center;justify-content:center;gap:28px;
@@ -151,10 +151,10 @@ svg{display:block}
 .footer button:hover{color:#c89bff}
 .footer-bottom{display:flex;justify-content:space-between;margin-top:52px;padding-top:25px;border-top:1px solid rgba(255,255,255,.06);color:#5f586f;font-size:12px}
 
-.tool-page{display:none;min-height:100vh;padding:100px 20px 70px}
+.tool-page{display:none;position:relative;min-height:100vh;padding:100px 20px 70px}
 .tool-page.active{display:block}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(9,6,18,.86)}
 .back-btn{display:flex;align-items:center;gap:9px;padding:12px 18px;border:1px solid rgba(255,255,255,.1);border-radius:999px;color:#c8c0d7;background:rgba(255,255,255,.035);font-weight:700}
+.standalone-back{position:absolute;top:96px;left:24px;z-index:5}
 .tool-head{text-align:center;padding:82px 20px 52px}
 .tool-head h1{font-size:clamp(52px,7vw,78px);letter-spacing:-.06em}
 .tool-head p{max-width:670px;margin:22px auto 0;color:var(--muted);line-height:1.75}
@@ -211,8 +211,8 @@ svg{display:block}
         <button class="secondary" onclick="go('how')">Learn More</button>
       </div>
       <div class="tags">
-        <button class="tag-button" onclick="openTool('a')">Something1</button>
-        <button class="tag-button" onclick="openTool('b')">Game Copier</button>
+        <span class="tag-button static-tag">Something1</span>
+        <span class="tag-button static-tag">Game Copier</span>
       </div>
     </div>
   </section>
@@ -283,10 +283,7 @@ svg{display:block}
 
 <section id="toolPage" class="tool-page">
   <div class="container">
-    <div class="topbar">
-      <button class="back-btn" onclick="closeTool()">← Back</button>
-      <div class="brand"><img class="brand-logo" src="favicon.png" alt="Matrix logo">Matrix</div>
-    </div>
+    <button class="back-btn standalone-back" onclick="closeTool()">← Back</button>
     <div class="tool-head"><h1 id="toolTitle">Something5 <span class="purple">Tool</span></h1><p id="toolSub">Access Something6 through a clean, focused interface.</p></div>
     <div class="workspace">
       <article class="workspace-card">
