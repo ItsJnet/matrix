@@ -3,1176 +3,419 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Matrix</title> 
+<title>Matrix</title>
 <link rel="icon" type="image/png" href="favicon.png">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+:root{
+  --bg:#07040d; --panel:#0e0918; --panel2:#130b21; --text:#f8f6ff;
+  --muted:#80788f; --purple:#9b4df5; --purple2:#6e29d9;
+  --border:rgba(155,77,245,.28); --green:#39d98a; --red:#ef4444;
+  --radius:24px; --max:1180px;
 }
-
-html {
-    scroll-behavior: smooth;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh; overflow-x:hidden; color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 50% 8%,rgba(118,43,209,.23),transparent 33%),
+    linear-gradient(rgba(120,63,179,.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(120,63,179,.12) 1px,transparent 1px),
+    var(--bg);
+  background-size:auto,64px 64px,64px 64px,auto;
 }
+button,input{font:inherit}
+button{border:0}
+a{text-decoration:none;color:inherit}
+svg{display:block}
+.container{width:min(var(--max),calc(100% - 44px));margin:auto}
+.hidden{display:none!important}
 
-body {
-    background: #07050d;
-    color: white;
-    overflow-x: hidden;
+.nav-wrap{width:min(900px,calc(100% - 44px));margin:24px auto 0}
+.nav{
+  min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:8px 12px 8px 18px;border:1px solid var(--border);border-radius:999px;
+  background:rgba(9,6,18,.86);backdrop-filter:blur(18px);
+  box-shadow:0 18px 60px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.03)
 }
-
-
-/* BACKGROUND GRID */
-
-body::before {
-    content:"";
-    position:fixed;
-    inset:0;
-    background:
-    linear-gradient(rgba(139,92,246,.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139,92,246,.08) 1px, transparent 1px);
-    background-size:45px 45px;
-    z-index:-1;
+.brand{display:flex;align-items:center;gap:11px;font-weight:800}
+.brand-mark{width:34px;height:34px;display:grid;grid-template-columns:1fr 1fr;gap:4px;transform:rotate(-5deg)}
+.brand-mark span{border-radius:5px;background:linear-gradient(145deg,#b95cff,#7428dd);box-shadow:0 0 16px rgba(168,85,247,.45)}
+.nav-links{display:flex;gap:6px}
+.nav-btn{
+  color:#aaa1b9;background:transparent;padding:10px 21px;border-radius:999px;
+  font-weight:650;cursor:pointer;transition:.2s
 }
+.nav-btn:hover{color:#fff;transform:translateY(-2px)}
+.nav-btn.active{background:linear-gradient(135deg,var(--purple2),var(--purple));color:#fff;box-shadow:0 0 22px rgba(155,77,245,.4)}
 
-
-
-/* HERO */
-
-.hero {
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:40px 20px;
+.hero{min-height:690px;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 20px 84px}
+.hero-inner{width:min(930px,100%)}
+.pill{
+  width:max-content;max-width:100%;margin:0 auto 30px;padding:9px 16px;
+  border:1px solid rgba(161,91,247,.35);border-radius:999px;background:rgba(55,27,92,.34);
+  color:#d8b9ff;font:600 13px "JetBrains Mono",monospace;letter-spacing:.07em;text-transform:uppercase
 }
-
-
-.logo {
-    font-size:70px;
-    font-weight:900;
-    letter-spacing:-3px;
+.pill::before{content:"";display:inline-block;width:7px;height:7px;margin-right:9px;border-radius:50%;background:var(--purple);box-shadow:0 0 12px var(--purple)}
+.hero h1{font-size:clamp(58px,7vw,92px);line-height:.98;letter-spacing:-.065em;font-weight:900}
+.purple{color:#aa5cff;text-shadow:0 0 34px rgba(168,85,247,.24)}
+.hero p{max-width:830px;margin:34px auto 0;color:var(--muted);font-size:18px;line-height:1.8}
+.actions{display:flex;justify-content:center;gap:14px;margin-top:38px}
+.primary,.secondary,.tool-btn,.back-btn,.action-btn{
+  cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s,background .22s
 }
-
-
-.hero h1 {
-    margin-top:25px;
-    font-size:48px;
-    line-height:1.15;
+.primary,.tool-btn,.action-btn{
+  color:white;background:linear-gradient(135deg,#7130e8,#a64ef4);font-weight:800;
+  box-shadow:0 12px 32px rgba(122,43,226,.34)
 }
+.primary{padding:16px 34px;border-radius:14px}
+.secondary{padding:16px 34px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:rgba(255,255,255,.035);color:white;font-weight:700}
+.primary:hover,.secondary:hover,.tool-btn:hover,.action-btn:hover,.back-btn:hover{transform:translateY(-4px)}
+.primary:hover,.tool-btn:hover,.action-btn:hover{box-shadow:0 18px 42px rgba(153,67,240,.52)}
+.tags{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin-top:34px}
+.tag{padding:8px 14px;border:1px solid rgba(255,255,255,.1);border-radius:9px;background:rgba(255,255,255,.025);color:#88809c;font:12px "JetBrains Mono",monospace;text-transform:uppercase}
 
-
-.hero h1 span {
-    color:#8b5cf6;
+.status{
+  width:min(var(--max),calc(100% - 44px));display:flex;align-items:center;justify-content:center;gap:28px;
+  margin:-34px auto 42px;padding:14px 24px;border:1px solid rgba(139,63,242,.2);
+  border-radius:16px;background:rgba(10,7,20,.72);backdrop-filter:blur(12px)
 }
+.status-title{display:flex;align-items:center;gap:9px;color:#bca7dc;font:12px "JetBrains Mono",monospace;text-transform:uppercase}
+.status-title i,.status-item i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(52,211,153,.8)}
+.status-items{display:flex;gap:26px;color:#77708f;font-size:13px}
+.status-item{display:flex;align-items:center;gap:8px}
 
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:22px;overflow:hidden;background:rgba(11,7,22,.8)}
+.stat{min-height:126px;display:grid;place-content:center;text-align:center;padding:24px;border-right:1px solid rgba(139,63,242,.2)}
+.stat:last-child{border-right:0}
+.stat strong{font-size:38px;letter-spacing:-.05em}
+.stat span{margin-top:12px;color:#6e6784;font:12px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.11em}
 
-.hero p {
-    max-width:700px;
-    margin-top:25px;
-    color:#a1a1aa;
-    font-size:18px;
-    line-height:1.6;
+.section{padding:108px 20px}
+.heading{text-align:center}
+.kicker{color:#9c8bbb;font:600 12px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.12em}
+.kicker::before,.kicker::after{content:"";display:inline-block;width:34px;height:1px;vertical-align:middle;margin:0 13px;background:#7b6e93}
+.heading h2{margin-top:24px;font-size:clamp(42px,5vw,58px);line-height:1;letter-spacing:-.055em}
+.heading p{max-width:660px;margin:20px auto 0;color:var(--muted);font-size:17px;line-height:1.7}
+
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:58px}
+.card{
+  position:relative;min-height:490px;display:flex;flex-direction:column;padding:34px;overflow:hidden;
+  border:1px solid var(--border);border-radius:30px;background:linear-gradient(145deg,rgba(20,12,39,.82),rgba(9,6,19,.92));
+  box-shadow:0 24px 70px rgba(0,0,0,.28);transition:.28s;text-align:left
 }
-
-
-.button {
-    margin-top:35px;
-    background:#8b5cf6;
-    color:white;
-    border:none;
-    padding:16px 45px;
-    border-radius:16px;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.25s;
+.card:hover{transform:translateY(-10px);border-color:rgba(168,85,247,.62);box-shadow:0 32px 85px rgba(0,0,0,.38),0 0 38px rgba(126,34,206,.2)}
+.card-label{position:absolute;top:24px;right:24px;padding:7px 11px;border:1px solid rgba(168,85,247,.28);border-radius:999px;background:rgba(83,34,142,.2);color:#bca4d8;font:600 10px "JetBrains Mono",monospace;text-transform:uppercase}
+.icon{
+  width:64px;height:64px;display:grid;place-items:center;margin-bottom:30px;border:1px solid rgba(168,85,247,.4);
+  border-radius:19px;background:linear-gradient(145deg,rgba(125,49,214,.24),rgba(65,25,111,.18))
 }
+.icon svg{width:31px;height:31px;stroke:#fff;filter:drop-shadow(0 0 8px rgba(185,108,255,.4))}
+.card h3{font-size:31px;letter-spacing:-.045em}
+.card p{min-height:78px;margin-top:17px;color:#827a98;font-size:15px;line-height:1.72}
+.features{display:grid;gap:13px;margin:28px 0 32px;list-style:none}
+.features li{display:flex;align-items:center;gap:11px;color:#c5bed4;font-size:14px}
+.check{width:21px;height:21px;display:grid;place-items:center;border:1px solid rgba(168,85,247,.35);border-radius:7px;background:rgba(139,63,242,.13);color:#bd7bff;font-size:12px;font-weight:900}
+.tool-btn{width:100%;min-height:53px;display:flex;align-items:center;justify-content:center;gap:9px;margin-top:auto;border-radius:15px}
+.tool-btn svg{width:18px;height:18px;stroke:currentColor}
 
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:58px}
+.step{min-height:270px;padding:32px;border:1px solid rgba(139,63,242,.24);border-radius:22px;background:linear-gradient(145deg,rgba(18,11,34,.8),rgba(9,6,18,.92));transition:.28s}
+.step:hover{transform:translateY(-8px);border-color:rgba(168,85,247,.55);box-shadow:0 26px 60px rgba(0,0,0,.32)}
+.num{width:52px;height:52px;display:grid;place-items:center;margin-bottom:27px;border:1px solid rgba(168,85,247,.38);border-radius:17px;background:rgba(139,63,242,.2);color:#d7adff;font:800 18px "JetBrains Mono",monospace}
+.step h3{font-size:22px}
+.step p{margin-top:14px;color:#7f7793;font-size:14px;line-height:1.75}
 
-.button:hover {
-    transform:translateY(-5px);
-    box-shadow:0 0 30px rgba(139,92,246,.7);
-}
+.footer{padding:72px 20px 34px;border-top:1px solid rgba(139,63,242,.16);background:linear-gradient(to bottom,rgba(8,5,16,.2),rgba(6,4,13,.92))}
+.footer-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:50px}
+.footer p{max-width:430px;margin-top:18px;color:#716980;font-size:14px;line-height:1.75}
+.footer h4{color:#b5a5c9;font:11px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.12em}
+.footer-links{display:grid;gap:13px;margin-top:18px}
+.footer button{width:max-content;background:transparent;color:#716980;cursor:pointer}
+.footer button:hover{color:#c89bff}
+.footer-bottom{display:flex;justify-content:space-between;margin-top:52px;padding-top:25px;border-top:1px solid rgba(255,255,255,.06);color:#5f586f;font-size:12px}
 
+.tool-page{display:none;min-height:100vh;padding:24px 20px 70px}
+.tool-page.active{display:block}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(9,6,18,.86)}
+.back-btn{display:flex;align-items:center;gap:9px;padding:12px 18px;border:1px solid rgba(255,255,255,.1);border-radius:999px;color:#c8c0d7;background:rgba(255,255,255,.035);font-weight:700}
+.tool-head{text-align:center;padding:82px 20px 52px}
+.tool-head h1{font-size:clamp(52px,7vw,78px);letter-spacing:-.06em}
+.tool-head p{max-width:670px;margin:22px auto 0;color:var(--muted);line-height:1.75}
+.workspace{display:grid;grid-template-columns:1.05fr .95fr;gap:26px}
+.workspace-card{min-height:475px;padding:34px;border:1px solid var(--border);border-radius:30px;background:linear-gradient(145deg,rgba(19,11,37,.88),rgba(9,6,19,.94))}
+.workspace-card h2{font-size:30px}
+.workspace-card p{margin-top:14px;color:#817990;line-height:1.72}
+.input-label{display:block;margin-top:31px;color:#aca3bc;font:600 11px "JetBrains Mono",monospace;text-transform:uppercase}
+.tool-input{width:100%;min-height:57px;margin-top:11px;padding:0 18px;border:1px solid rgba(139,63,242,.26);border-radius:15px;outline:0;color:white;background:rgba(7,4,14,.76)}
+.tool-input:focus{border-color:rgba(168,85,247,.7);box-shadow:0 0 0 4px rgba(139,63,242,.1)}
+.tool-input.invalid{border-color:var(--red);animation:shake .38s}
+.error{min-height:20px;margin-top:10px;color:#fb7185;font-size:12px;opacity:0}
+.error.visible{opacity:1}
+.action-btn{width:100%;min-height:55px;margin-top:10px;border-radius:15px;color:#fff}
+.video{width:100%;aspect-ratio:16/9;margin-top:25px;border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.video iframe{width:100%;height:100%;border:0}
 
+.overlay{display:none;position:fixed;inset:0;z-index:9999;place-items:center;background:rgba(3,2,8,.88);backdrop-filter:blur(12px)}
+.overlay.show{display:grid}
+.loader-box{width:min(520px,calc(100% - 36px));padding:36px;border:1px solid var(--border);border-radius:26px;background:linear-gradient(145deg,#120a20,#090611);text-align:center}
+.spinner{width:66px;height:66px;margin:24px auto;border:5px solid rgba(255,255,255,.12);border-top-color:var(--purple);border-radius:50%;animation:spin .8s linear infinite}
+.progress{height:12px;margin-top:24px;border-radius:999px;overflow:hidden;background:#241832}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--purple2),var(--purple));transition:width .18s}
+.complete{color:#8df0b6}
 
-
-/* STATS */
-
-
-.stats {
-    width:90%;
-    max-width:1100px;
-    margin:0 auto;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    border-radius:25px;
-    overflow:hidden;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(139,92,246,.25);
-}
-
-
-.stat {
-    padding:35px 15px;
-    text-align:center;
-    border-right:1px solid rgba(255,255,255,.08);
-}
-
-
-.stat:last-child {
-    border:none;
-}
-
-
-.stat h2 {
-    font-size:35px;
-}
-
-
-.stat p {
-    color:#a1a1aa;
-    margin-top:8px;
-}
-
-
-
-/* SECTIONS */
-
-
-.section {
-    padding:110px 20px;
-    text-align:center;
-}
-
-
-.small-title {
-    color:#8b5cf6;
-    text-transform:uppercase;
-    font-size:14px;
-    font-weight:bold;
-}
-
-
-.section h2 {
-    font-size:45px;
-    margin-top:12px;
-}
-
-
-.description {
-    color:#a1a1aa;
-    max-width:650px;
-    margin:20px auto;
-    line-height:1.6;
-}
-
-
-
-/* TOOL AREA */
-
-
-.tools {
-    margin-top:60px;
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    flex-wrap:wrap;
-}
-
-
-.tool-card {
-    width:350px;
-    min-height:430px;
-    padding:35px;
-    text-align:left;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(139,92,246,.25);
-    border-radius:25px;
-    transition:.25s;
-}
-
-
-.tool-card:hover {
-    transform:translateY(-8px);
-    box-shadow:0 0 35px rgba(139,92,246,.25);
-}
-
-
-
-.icon {
-    width:55px;
-    height:55px;
-    border-radius:15px;
-    border:2px solid white;
-    margin-bottom:25px;
-}
-
-
-.tool-card h3 {
-    font-size:28px;
-}
-
-
-.tool-card p {
-    margin-top:15px;
-    color:#a1a1aa;
-    line-height:1.6;
-}
-
-
-.features {
-    margin-top:25px;
-}
-
-
-.features div {
-    margin:10px 0;
-}
-
-
-.tool-button {
-    margin-top:35px;
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:15px;
-    background:#8b5cf6;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.25s;
-}
-
-
-.tool-button:hover {
-    transform:translateY(-4px);
-    box-shadow:0 0 25px rgba(139,92,246,.7);
-}
-
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+@media(max-width:900px){.grid2,.workspace{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
 </style>
-
 </head>
-
 <body>
 
+<main id="homePage">
+  <div class="nav-wrap">
+    <nav class="nav">
+      <a class="brand" href="#home"><span class="brand-mark"><span></span><span></span><span></span><span></span></span>Matrix</a>
+      <div class="nav-links">
+        <button class="nav-btn active" onclick="go('home')">Home</button>
+        <button class="nav-btn" onclick="go('tools')">Tools</button>
+      </div>
+    </nav>
+  </div>
 
-<section class="hero">
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="pill">Professional Roblox Tools</div>
+      <h1>Matrix<br>Professional Roblox<br><span class="purple">Experience Booster</span></h1>
+      <p>Empower your Roblox experience with cutting-edge automation tools designed for players who demand excellence. Play games, unlock features, get better — all in one place.</p>
+      <div class="actions">
+        <button class="primary" onclick="go('tools')">Get Started</button>
+        <button class="secondary" onclick="go('how')">Learn More</button>
+      </div>
+      <div class="tags">
+        <span class="tag">Something1</span><span class="tag">Game Copier</span><span class="tag">Premium Tools</span><span class="tag">Instant Access</span>
+      </div>
+    </div>
+  </section>
 
+  <section class="status">
+    <div class="status-title"><i></i>System Status</div>
+    <div class="status-items">
+      <div class="status-item"><i></i>Servers Operational</div>
+      <div class="status-item"><i></i>Tools Operational</div>
+      <div class="status-item"><i></i>Database Operational</div>
+    </div>
+  </section>
 
-<div class="logo">
-Matrix
-</div>
+  <section class="container stats">
+    <div class="stat"><strong>10,000+</strong><span>Active Users</span></div>
+    <div class="stat"><strong>2+</strong><span>Pro Tools</span></div>
+    <div class="stat"><strong>99.7%</strong><span>Uptime</span></div>
+    <div class="stat"><strong>24/7</strong><span>Support</span></div>
+  </section>
 
+  <section class="section" id="tools">
+    <div class="container">
+      <header class="heading"><div class="kicker">Available Tools</div><h2>Everything You Need</h2><p>Two professional-grade tools built for Roblox players who want a cleaner, faster experience.</p></header>
+      <div class="grid2">
+        <article class="card">
+          <span class="card-label">Premium</span>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.8 13.1h6.4L10.8 22 19.2 10.9h-6.4L13 2Z"/></svg></div>
+          <h3>Something2</h3>
+          <p>Download Something3 with instant access to premium and advanced features.</p>
+          <ul class="features"><li><span class="check">✓</span>Premium access</li><li><span class="check">✓</span>Instant availability</li><li><span class="check">✓</span>Advanced features</li></ul>
+          <button class="tool-btn" onclick="openTool('a')">Use Tool <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></button>
+        </article>
+        <article class="card">
+          <span class="card-label">AI Powered</span>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/><path d="M11 12h5"/><path d="M11 15h4"/></svg></div>
+          <h3>Game Copier</h3>
+          <p>AI-powered game replication with automatic optimization and cloud backup.</p>
+          <ul class="features"><li><span class="check">✓</span>AI-powered copy</li><li><span class="check">✓</span>Automatic optimization</li><li><span class="check">✓</span>Cloud backup</li></ul>
+          <button class="tool-btn" onclick="openTool('b')">Use Tool <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></button>
+        </article>
+      </div>
+    </div>
+  </section>
 
-<h1>
-Professional Roblox<br>
-<span>Experience Booster</span>
-</h1>
+  <section class="section" id="how">
+    <div class="container">
+      <header class="heading"><div class="kicker">How It Works</div><h2>Ready in 3 Simple Steps</h2><p>Get started with Matrix in seconds — no technical knowledge required.</p></header>
+      <div class="steps">
+        <article class="step"><div class="num">01</div><h3>Choose a Tool</h3><p>Browse our collection and choose the tool that fits your needs.</p></article>
+        <article class="step"><div class="num">02</div><h3>Open & Configure</h3><p>Launch your selected tool with one click through a clean interface.</p></article>
+        <article class="step"><div class="num">03</div><h3>Done & Enjoy</h3><p>Complete the process and enjoy your upgraded Roblox experience.</p></article>
+      </div>
+    </div>
+  </section>
 
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><div class="brand"><span class="brand-mark"><span></span><span></span><span></span><span></span></span>Matrix</div><p>Professional Roblox tools built for players who expect a faster, cleaner, and more polished experience.</p></div>
+      <div><h4>Tools</h4><div class="footer-links"><button onclick="openTool('a')">Something4</button><button onclick="openTool('b')">Game Copier</button></div></div>
+      <div><h4>Navigation</h4><div class="footer-links"><button onclick="go('home')">Home</button><button onclick="go('tools')">Tools</button><button onclick="go('how')">How It Works</button></div></div>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 Matrix. All rights reserved.</span><span>Not affiliated with Roblox Corporation.</span></div>
+  </footer>
+</main>
 
-<p>
-Empower your Roblox experience with cutting-edge automation tools designed for players who demand excellence. Play games, unlock features, get better — all in one place.
-</p>
-
-
-<button class="button" onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">
-Get Started
-</button>
-
-
+<section id="toolPage" class="tool-page">
+  <div class="container">
+    <div class="topbar">
+      <button class="back-btn" onclick="closeTool()">← Back</button>
+      <div class="brand"><span class="brand-mark"><span></span><span></span><span></span><span></span></span>Matrix</div>
+    </div>
+    <div class="tool-head"><h1 id="toolTitle">Something5 <span class="purple">Tool</span></h1><p id="toolSub">Access Something6 through a clean, focused interface.</p></div>
+    <div class="workspace">
+      <article class="workspace-card">
+        <div class="icon" id="toolIcon"></div>
+        <h2 id="workspaceTitle">Something7</h2>
+        <p id="workspaceDescription">Download Something8 — a polished Matrix tool with advanced features and instant access.</p>
+        <label class="input-label" for="toolInput">License code</label>
+        <input id="toolInput" class="tool-input" type="password" placeholder="Enter your Matrix license code" autocomplete="off">
+        <p id="inputError" class="error">Invalid code format. The code must begin with $s.</p>
+        <button id="actionButton" class="action-btn" onclick="submitTool()">Download Something9</button>
+      </article>
+      <article class="workspace-card">
+        <h2>How to Use</h2>
+        <p>Watch the short tutorial before starting.</p>
+        <div class="video"><iframe src="https://www.youtube.com/embed/dcd3gNvE3zc" title="Matrix tutorial" allowfullscreen></iframe></div>
+      </article>
+    </div>
+  </div>
 </section>
 
-
-
-<div class="stats">
-
-
-<div class="stat">
-<h2>10,000+</h2>
-<p>active users</p>
+<div id="overlay" class="overlay">
+  <div class="loader-box">
+    <h2 id="loadTitle">Processing</h2>
+    <div class="spinner"></div>
+    <p id="loadStatus">Starting process...</p>
+    <div class="progress"><span id="progressBar"></span></div>
+  </div>
 </div>
-
-
-<div class="stat">
-<h2>2+</h2>
-<p>pro tools</p>
-</div>
-
-
-<div class="stat">
-<h2>99.7%</h2>
-<p>uptime</p>
-</div>
-
-
-<div class="stat">
-<h2>24/7</h2>
-<p>support</p>
-</div>
-
-
-</div>
-
-
-
-
-<section class="section" id="tools">
-
-<div class="small-title">
-Available Tools
-</div>
-
-
-<h2>
-Everything You Need
-</h2>
-
-
-<p class="description">
-2 professional-grade tools built for Roblox players.
-</p>
-
-
-<div class="tools"><!-- TOOL CARDS CONTINUED -->
-
-
-<div class="tool-card">
-
-
-<div class="icon" style="
-position:relative;
-">
-
-<div style="
-position:absolute;
-width:20px;
-height:32px;
-border-left:4px solid white;
-border-bottom:4px solid white;
-transform:rotate(-35deg);
-left:18px;
-top:10px;
-"></div>
-
-</div>
-
-
-<h3>
-Something1
-</h3>
-
-
-<p>
-Download Something2 with instant access to premium and advanced features.
-</p>
-
-
-<div class="features">
-
-<div>✓ Premium</div>
-<div>✓ Instant access</div>
-<div>✓ Advanced features</div>
-
-</div>
-
-
-<button class="tool-button" onclick="openTool('something1')">
-Use Tool
-</button>
-
-
-</div>
-
-
-
-
-
-<div class="tool-card">
-
-
-<div class="icon" style="
-display:flex;
-align-items:center;
-justify-content:center;
-gap:3px;
-">
-
-
-<div style="
-width:8px;
-height:30px;
-border:2px solid white;
-"></div>
-
-
-<div style="
-width:8px;
-height:30px;
-border:2px solid white;
-"></div>
-
-
-<div style="
-width:8px;
-height:30px;
-border:2px solid white;
-"></div>
-
-
-</div>
-
-
-
-<h3>
-Game Copier
-</h3>
-
-
-<p>
-AI-powered game replication with automatic optimization and cloud backup.
-</p>
-
-
-
-<div class="features">
-
-<div>✓ AI-powered copy</div>
-<div>✓ Auto optimization</div>
-<div>✓ Cloud backup</div>
-
-</div>
-
-
-
-<button class="tool-button" onclick="openTool('copy')">
-Use Tool
-</button>
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-<!-- HOW IT WORKS -->
-
-
-<section class="section">
-
-
-<div class="small-title">
-How It Works
-</div>
-
-
-<h2>
-Ready in 3 Simple Steps
-</h2>
-
-
-<p class="description">
-Get started with Matrix in seconds — no technical knowledge required.
-</p>
-
-
-
-<div class="tools">
-
-
-
-<div class="tool-card">
-
-<h3>
-1
-</h3>
-
-<h3>
-Choose a Tool
-</h3>
-
-<p>
-Browse our collection of 2+ professional tools and pick the one that fits your need.
-</p>
-
-</div>
-
-
-
-
-<div class="tool-card">
-
-<h3>
-2
-</h3>
-
-<h3>
-Open & Configure
-</h3>
-
-<p>
-Launch the tool with one click. Each tool has a simple interface — no setup hassle.
-</p>
-
-</div>
-
-
-
-
-<div class="tool-card">
-
-<h3>
-3
-</h3>
-
-<h3>
-Done & Enjoy
-</h3>
-
-<p>
-Results are instant. Enjoy premium Roblox features like a pro player.
-</p>
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-<!-- TOOL PAGE -->
-
-
-<div id="toolPage" style="
-display:none;
-padding:50px 20px;
-min-height:100vh;
-">
-
-
-
-<button class="button" onclick="closeTool()">
-← Back
-</button>
-
-
-
-<h1 id="toolTitle" style="
-text-align:center;
-font-size:55px;
-margin-top:60px;
-">
-</h1>
-
-
-
-<div style="
-display:flex;
-justify-content:center;
-gap:30px;
-flex-wrap:wrap;
-margin-top:60px;
-">
-
-
-
-<div class="tool-card">
-
-
-
-<h3 id="toolName">
-</h3>
-
-
-<p id="toolDescription">
-</p>
-
-
-
-<input id="toolInput"
-type="password"
-placeholder="Paste your game key file here"
-style="
-width:100%;
-padding:16px;
-margin-top:30px;
-border-radius:15px;
-border:2px solid transparent;
-background:#120d20;
-color:white;
-font-size:16px;
-outline:none;
-">
-
-
-
-<button class="tool-button" onclick="submitTool()">
-Download Something
-</button>
-
-
-
-<p id="errorText" style="
-color:#ef4444;
-display:none;
-margin-top:15px;
-">
-Invalid format.
-</p>
-
-
-
-</div>
-
-
-
-
-
-<div class="tool-card">
-
-
-<h3>
-⏱ How To Use
-</h3>
-
-
-
-<p>
-Follow the tutorial below.
-</p>
-
-
-<iframe
-width="100%"
-height="200"
-src="https://www.youtube.com/embed/dcd3gNvE3zc"
-style="
-border-radius:15px;
-margin-top:20px;
-border:none;
-">
-</iframe>
-
-
-</div>
-
-
-
-</div>
-
-
-</div><!-- LOADING SCREEN -->
-
-<div id="loadingScreen" style="
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.85);
-z-index:999;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-text-align:center;
-">
-
-
-<h1 id="loadingTitle">
-Loading
-</h1>
-
-
-<div class="spinner"></div>
-
-
-<h3 id="loadingStatus">
-Starting process...
-</h3>
-
-
-
-<div style="
-width:320px;
-height:12px;
-background:#222;
-border-radius:20px;
-overflow:hidden;
-margin-top:25px;
-">
-
-
-<div id="progressBar" style="
-height:100%;
-width:0%;
-background:#8b5cf6;
-transition:.2s;
-">
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<style>
-
-
-.spinner {
-
-width:60px;
-height:60px;
-border:5px solid rgba(255,255,255,.2);
-border-top:5px solid #8b5cf6;
-border-radius:50%;
-margin:30px;
-
-animation:spin 1s linear infinite;
-
-}
-
-
-@keyframes spin {
-
-from {
-transform:rotate(0deg);
-}
-
-to {
-transform:rotate(360deg);
-}
-
-}
-
-
-
-.shake {
-
-animation:shake .35s;
-
-border-color:#ef4444 !important;
-
-}
-
-
-
-@keyframes shake {
-
-0% {
-transform:translateX(0);
-}
-
-25% {
-transform:translateX(-8px);
-}
-
-50% {
-transform:translateX(8px);
-}
-
-75% {
-transform:translateX(-8px);
-}
-
-100% {
-transform:translateX(0);
-}
-
-}
-
-
-</style>
-
-
-
-
 
 <script>
-
-
-let currentTool = "";
-
-
-
-function openTool(tool){
-
-
-document.querySelector(".hero").style.display="none";
-document.querySelector(".stats").style.display="none";
-document.querySelectorAll(".section").forEach(x=>{
-x.style.display="none";
-});
-
-
-document.getElementById("toolPage").style.display="block";
-
-
-currentTool = tool;
-
-
-
-if(tool==="something1"){
-
-
-document.getElementById("toolTitle").innerHTML =
-`Something1 <span style="color:#8b5cf6">Tool</span>`;
-
-
-document.getElementById("toolName").innerHTML =
-"Something1";
-
-
-document.querySelector(".tool-button").innerHTML =
-"Download Something2";
-
-
-document.getElementById("toolDescription").innerHTML =
-"Download Something2 — the most powerful Roblox Something1.";
-
-}
-
-
-
-if(tool==="copy"){
-
-
-document.getElementById("toolTitle").innerHTML =
-`Copy <span style="color:#8b5cf6">Tool</span>`;
-
-
-document.getElementById("toolName").innerHTML =
-"Copy Games";
-
-
-document.querySelector(".tool-button").innerHTML =
-"Copy Game";
-
-
-document.getElementById("toolDescription").innerHTML =
-"Copy any Roblox game with one click.";
-
-}
-
-
-}
-
-
-
-
-
-function closeTool(){
-
-
-document.getElementById("toolPage").style.display="none";
-
-
-document.querySelector(".hero").style.display="flex";
-document.querySelector(".stats").style.display="grid";
-
-
-document.querySelectorAll(".section").forEach(x=>{
-x.style.display="block";
-});
-
-
-}
-
-
-
-
-
 const messages = [
-
-"Initializing environment...",
-"Loading modules...",
-"Checking configuration...",
-"Analyzing resources...",
-"Preparing workspace...",
-"Validating components...",
-"Syncing files...",
-"Generating cache...",
-"Optimizing structure...",
-"Scanning directories...",
-"Building connection...",
-"Preparing assets...",
-"Loading dependencies...",
-"Compiling resources...",
-"Verifying permissions...",
-"Processing data...",
-"Updating system...",
-"Finalizing setup...",
-"Running diagnostics...",
-"Completing operation..."
-
+"Initializing environment...","Loading modules...","Checking configuration...","Analyzing resources...",
+"Preparing workspace...","Validating components...","Syncing files...","Generating cache...",
+"Optimizing structure...","Scanning directories...","Building connection...","Preparing assets...",
+"Loading dependencies...","Compiling resources...","Verifying permissions...","Processing data...",
+"Updating system...","Finalizing setup...","Running diagnostics...","Completing operation...",
+"Indexing package data...","Resolving runtime modules...","Checking local state...","Preparing interface...",
+"Mapping resources...","Refreshing workspace...","Reviewing manifest...","Generating temporary cache...",
+"Optimizing memory layout...","Validating request format...","Building task queue...","Syncing configuration...",
+"Scanning metadata...","Reading module table...","Checking package integrity...","Preparing runtime...",
+"Loading workspace map...","Resolving internal references...","Compiling task graph...","Updating session..."
 ];
 
+let currentTool = "a";
+let loadingTimer = null;
 
-
-// duplicate random messages to create a larger pool
-
-for(let i=0;i<220;i++){
-
-messages.push(
-[
-"Scanning file index...",
-"Mapping resources...",
-"Checking integrity...",
-"Optimizing package...",
-"Reading metadata...",
-"Updating components...",
-"Loading configuration...",
-"Resolving dependencies...",
-"Preparing modules..."
-][Math.floor(Math.random()*9)]
-);
-
+function go(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
+function lightning(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.8 13.1h6.4L10.8 22 19.2 10.9h-6.4L13 2Z"/></svg>';
+}
 
+function copyIcon(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/><path d="M11 12h5"/><path d="M11 15h4"/></svg>';
+}
 
+function openTool(tool){
+  currentTool = tool;
+  document.getElementById("homePage").classList.add("hidden");
+  document.getElementById("toolPage").classList.add("active");
+  document.getElementById("toolInput").value = "";
+  document.getElementById("toolInput").classList.remove("invalid");
+  document.getElementById("inputError").classList.remove("visible");
 
+  if(tool === "a"){
+    document.getElementById("toolTitle").innerHTML = 'Something5 <span class="purple">Tool</span>';
+    document.getElementById("toolSub").textContent = "Access Something6 through a clean, focused interface.";
+    document.getElementById("workspaceTitle").textContent = "Something7";
+    document.getElementById("workspaceDescription").textContent = "Download Something8 — a polished Matrix tool with advanced features and instant access.";
+    document.getElementById("actionButton").textContent = "Download Something9";
+    document.getElementById("toolIcon").innerHTML = lightning();
+  } else {
+    document.getElementById("toolTitle").innerHTML = 'Copy <span class="purple">Games</span>';
+    document.getElementById("toolSub").textContent = "Copy any Roblox game with one click.";
+    document.getElementById("workspaceTitle").textContent = "Game Copier";
+    document.getElementById("workspaceDescription").textContent = "Copy games through a streamlined Matrix workflow.";
+    document.getElementById("actionButton").textContent = "Copy Game";
+    document.getElementById("toolIcon").innerHTML = copyIcon();
+  }
+
+  window.scrollTo({top:0,behavior:"instant"});
+}
+
+function closeTool(){
+  document.getElementById("toolPage").classList.remove("active");
+  document.getElementById("homePage").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"instant"});
+}
 
 function submitTool(){
+  const input = document.getElementById("toolInput");
+  const value = input.value.trim();
+  const error = document.getElementById("inputError");
 
+  if(!value.startsWith("$s")){
+    input.classList.remove("invalid");
+    void input.offsetWidth;
+    input.classList.add("invalid");
+    error.classList.add("visible");
+    return;
+  }
 
-let input =
-document.getElementById("toolInput");
-
-let value=input.value;
-
-
-
-if(!value.startsWith("$s")){
-
-
-input.classList.remove("shake");
-
-void input.offsetWidth;
-
-input.classList.add("shake");
-
-document.getElementById("errorText").style.display="block";
-
-return;
-
+  input.classList.remove("invalid");
+  error.classList.remove("visible");
+  startLoading();
 }
-
-
-
-document.getElementById("errorText").style.display="none";
-
-
-startLoading();
-
-
-}
-
-
-
-
-
-
 
 function startLoading(){
+  const overlay = document.getElementById("overlay");
+  const bar = document.getElementById("progressBar");
+  const status = document.getElementById("loadStatus");
+  const title = document.getElementById("loadTitle");
+  let progress = 0;
 
+  overlay.classList.add("show");
+  bar.style.width = "0%";
+  status.className = "";
+  title.textContent = currentTool === "a" ? "Something10 Tool" : "Copy Games";
 
-document.getElementById("loadingScreen").style.display="flex";
+  function tick(){
+    if(progress >= 100){
+      status.textContent = "All set! Wait 30 minutes to an hour before entering.";
+      status.className = "complete";
+      setTimeout(() => overlay.classList.remove("show"), 6000);
+      return;
+    }
 
+    const jump = Math.floor(Math.random()*11)+2;
+    progress = Math.min(100, progress + jump);
+    bar.style.width = progress + "%";
+    status.textContent = messages[Math.floor(Math.random()*messages.length)];
 
-let progress=0;
+    const delayRoll = Math.random();
+    const nextDelay = delayRoll < .08 ? 2300 + Math.random()*1000 :
+                      delayRoll < .25 ? 500 + Math.random()*700 :
+                      80 + Math.random()*240;
 
+    loadingTimer = setTimeout(tick,nextDelay);
+  }
 
-let bar=document.getElementById("progressBar");
-
-let status=document.getElementById("loadingStatus");
-
-let interval=setInterval(()=>{
-
-
-let increase=Math.floor(Math.random()*15)+1;
-
-progress+=increase;
-
-
-if(progress>100)
-progress=100;
-
-
-
-bar.style.width=progress+"%";
-
-
-
-status.innerHTML =
-messages[Math.floor(Math.random()*messages.length)];
-
-
-
-if(progress>=100){
-
-
-clearInterval(interval);
-
-
-
-setTimeout(()=>{
-
-
-status.innerHTML=
-"All set! Wait 30 minutes to an hour before entered.";
-
-
-setTimeout(()=>{
-
-
-document.getElementById("loadingScreen").style.display="none";
-
-
-},6000);
-
-
-
-},1000);
-
-
-
+  tick();
 }
 
-
-
-},Math.random()*700+100);
-
-
-
-}
-
-
-
-</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-
-// SUPABASE CONNECTION
-
-const supabaseUrl = "https://bekubfmrdglxnutodwfh.supabase.co";
-
-
-const supabaseKey = "sb_publishable_zBATwwjHQEONwyQyqA7p_Q_78blfuHQ";
-
-
-const supabaseClient = supabase.createClient(
-    supabaseUrl,
-    supabaseKey
-);
-
-
-
-
-
-// ORIGINAL SUBMIT FUNCTION BACKUP
-
-const oldSubmitTool = submitTool;
-
-
-
-submitTool = async function(){
-
-
-let input =
-document.getElementById("toolInput");
-
-
-let value=input.value.trim();
-
-
-
-if(!value.startsWith("$s")){
-
-
-input.classList.remove("shake");
-
-void input.offsetWidth;
-
-input.classList.add("shake");
-
-
-document.getElementById("errorText").style.display="block";
-
-
-return;
-
-}
-
-
-
-document.getElementById("errorText").style.display="none";
-
-
-
-
-
-// SEND TO DATABASE
-
-const { data, error } =
-await supabaseClient
-.from("submissions")
-.insert([
-{
-text:value
-}
-]);
-
-
-
-if(error){
-
-console.log(error);
-
-alert("Submission error.");
-
-return;
-
-}
-
-
-
-
-
-startLoading();
-
-
-
-}
-
-
-
-
+document.addEventListener("keydown",e=>{
+  if(e.key === "Escape" && document.getElementById("toolPage").classList.contains("active")) closeTool();
+  if(e.key.toLowerCase() === "g" && !document.getElementById("homePage").classList.contains("hidden")) go("tools");
+});
 </script>
-
-
 </body>
 </html>
