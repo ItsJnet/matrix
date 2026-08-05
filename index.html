@@ -137,7 +137,14 @@ svg{display:block}
 .card p{min-height:78px;margin-top:17px;color:#827a98;font-size:15px;line-height:1.72}
 .features{display:grid;gap:9px;margin:14px 0 16px;list-style:none}
 .features li{display:flex;align-items:center;gap:11px;color:#c5bed4;font-size:14px}
-.check{width:21px;height:21px;display:grid;place-items:center;border:1px solid rgba(168,85,247,.35);border-radius:7px;background:rgba(139,63,242,.13);color:#bd7bff;font-size:12px;font-weight:900}
+.check{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#a855f7;
+  box-shadow:0 0 8px rgba(168,85,247,.9),0 0 18px rgba(168,85,247,.5);
+  flex-shrink:0;
+}
 .tool-btn{width:100%;min-height:53px;display:flex;align-items:center;justify-content:center;gap:9px;margin-top:auto;border-radius:15px}
 .tool-btn svg{width:18px;height:18px;stroke:currentColor}
 
@@ -248,7 +255,7 @@ svg{display:block}
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.8 13.1h6.4L10.8 22 19.2 10.9h-6.4L13 2Z"/></svg></div>
           <h3>Exploit</h3>
           <p>Download Matrix with instant access to premium scripts and advanced features.</p>
-          <ul class="features"><li><span class="check">✓</span>Premium scripts</li><li><span class="check">✓</span>Instant access</li><li><span class="check">✓</span>Advanced features</li></ul>
+          <ul class="features"><li><span class="check"></span>Premium scripts</li><li><span class="check"></span>Instant access</li><li><span class="check"></span>Advanced features</li></ul>
           <button class="tool-btn" onclick="openTool('a')">Open Tool <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></button>
         </article>
         <article class="card">
@@ -256,7 +263,7 @@ svg{display:block}
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/><path d="M11 12h5"/><path d="M11 15h4"/></svg></div>
           <h3>Game Copier</h3>
           <p>AI-powered game replication with automatic optimization and cloud backup.</p>
-          <ul class="features"><li><span class="check">✓</span>AI-powered copy</li><li><span class="check">✓</span>Automatic optimization</li><li><span class="check">✓</span>Cloud backup</li></ul>
+          <ul class="features"><li><span class="check"></span>AI-powered copy</li><li><span class="check"></span>Automatic optimization</li><li><span class="check"></span>Cloud backup</li></ul>
           <button class="tool-btn" onclick="openTool('b')">Open Tool <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></button>
         </article>
       </div>
