@@ -326,7 +326,7 @@ svg{display:block}
 <div id="overlay" class="overlay">
   <div class="loader-box">
     <h2 id="loadTitle">Processing</h2>
-    <div class="spinner"></div>
+  <div class="spinner" id="spinner"></div>
     <p id="loadStatus">Starting process...</p>
     <div class="progress"><span id="progressBar"></span></div>
   </div>
@@ -427,62 +427,150 @@ async function submitTool(){
     return;
   }
 
-  startLoading();
+   startLoading();
 }
 
-function startLoading(){
+function startLoading() {
   const overlay = document.getElementById("overlay");
   const bar = document.getElementById("progressBar");
   const status = document.getElementById("loadStatus");
   const title = document.getElementById("loadTitle");
+  const spinner = document.getElementById("spinner");
+
   let progress = 0;
 
   clearTimeout(loadingTimer);
+
   overlay.classList.add("show");
+
+  // Reset spinner whenever loading starts again
+  spinner.innerHTML = "";
+  spinner.removeAttribute("style");
+
   bar.style.width = "0%";
   status.className = "";
-  title.textContent = currentTool === "a" ? "Something10 Tool" : "Copy Games";
 
-  function tick(){
-    if(progress >= 100){
-      status.textContent = "All set! Wait 30 minutes to an hour before entering.";
+  title.textContent =
+    currentTool === "a"
+      ? "Something10 Tool"
+      : "Copy Games";
+
+  function tick() {
+    if (progress >= 100) {
+      spinner.innerHTML = "✓";
+      spinner.style.animation = "none";
+      spinner.style.border = "none";
+      spinner.style.display = "flex";
+      spinner.style.alignItems = "center";
+      spinner.style.justifyContent = "center";
+      spinner.style.fontSize = "48px";
+      spinner.style.fontWeight = "900";
+      spinner.style.color = "#22c55e";
+      spinner.style.textShadow =
+        "0 0 18px rgba(34,197,94,.8)";
+
+      status.textContent =
+        "All set! Wait 30 minutes after download before use";
+
       status.className = "complete";
-      setTimeout(() => overlay.classList.remove("show"), 6000);
+
+      setTimeout(() => {
+        overlay.classList.remove("show");
+      }, 6000);
+
       return;
     }
 
-    progress = Math.min(100, progress + Math.floor(Math.random()*11)+2);
+    progress = Math.min(
+      100,
+      progress + Math.floor(Math.random() * 11) + 2
+    );
+
     bar.style.width = progress + "%";
-    status.textContent = messages[Math.floor(Math.random()*messages.length)];
+
+    status.textContent =
+      messages[Math.floor(Math.random() * messages.length)];
 
     const r = Math.random();
-    const delay = r < .08 ? 2300 + Math.random()*1000 : r < .25 ? 500 + Math.random()*700 : 80 + Math.random()*240;
+
+    const delay =
+      r < 0.08
+        ? 2300 + Math.random() * 1000
+        : r < 0.25
+        ? 500 + Math.random() * 700
+        : 80 + Math.random() * 240;
+
     loadingTimer = setTimeout(tick, delay);
   }
+
   tick();
 }
 
 /* Active Home/Tools navigation based on scroll position */
+
 const homeSection = document.getElementById("home");
 const toolsSection = document.getElementById("tools");
 const navHome = document.getElementById("navHome");
 const navTools = document.getElementById("navTools");
 
-function updateActiveNav(){
-  if(document.getElementById("homePage").classList.contains("hidden")) return;
-  const toolsTop = toolsSection.getBoundingClientRect().top;
-  const switchPoint = window.innerHeight * .38;
-  const inToolsArea = toolsTop <= switchPoint;
+function updateActiveNav() {
+  if (
+    document
+      .getElementById("homePage")
+      .classList.contains("hidden")
+  ) {
+    return;
+  }
 
-  navHome.classList.toggle("active", !inToolsArea);
-  navTools.classList.toggle("active", inToolsArea);
+  const toolsTop =
+    toolsSection.getBoundingClientRect().top;
+
+  const switchPoint =
+    window.innerHeight * 0.38;
+
+  const inToolsArea =
+    toolsTop <= switchPoint;
+
+  navHome.classList.toggle(
+    "active",
+    !inToolsArea
+  );
+
+  navTools.classList.toggle(
+    "active",
+    inToolsArea
+  );
 }
-window.addEventListener("scroll", updateActiveNav, {passive:true});
-window.addEventListener("load", updateActiveNav);
 
-document.addEventListener("keydown",e=>{
-  if(e.key === "Escape" && document.getElementById("toolPage").classList.contains("active")) closeTool();
-  if(e.key.toLowerCase() === "g" && !document.getElementById("homePage").classList.contains("hidden")) go("tools");
+window.addEventListener(
+  "scroll",
+  updateActiveNav,
+  { passive: true }
+);
+
+window.addEventListener(
+  "load",
+  updateActiveNav
+);
+
+document.addEventListener("keydown", (e) => {
+  if (
+    e.key === "Escape" &&
+    document
+      .getElementById("toolPage")
+      .classList.contains("active")
+  ) {
+    closeTool();
+  }
+
+  if (
+    e.key.toLowerCase() === "g" &&
+    !document
+      .getElementById("homePage")
+      .classList.contains("hidden")
+  ) {
+    go("tools");
+  }
 });
 </script>
 </body>
